@@ -12,7 +12,9 @@ export default function Index() {
     if (inputValue.length === 0) {
       console.log("ERROR! ");
       alert(" Please Fill Input!");
-    } else {
+    } else if(inputValue.length > 11){
+        alert("ERROR!")
+    }else {
       setDataArr([...dataArr, inputValue]);
     }
   }
@@ -29,15 +31,18 @@ export default function Index() {
         <Text style={styles.btnText}>Add Contact!</Text>
       </Pressable>
 
-      <FlatList style={styles.contacts} keyExtractor={(item, idx) => idx.toString()} data={dataArr} renderItem={({ item, index }) => (
+      {dataArr.length === 0 ? (<View style={styles.emptyMsg}><Text style={{ fontSize: 24, fontWeight: "bold", color: "red" }}>
+        Empty List ☹️
+      </Text>
+      </View>) : (<FlatList style={styles.contacts} keyExtractor={(item, idx) => idx.toString()} data={dataArr} renderItem={({ item, index }) => (
         <View style={styles.list}>
-          <Text numberOfLines={1} style={styles.text}>{item}</Text>
+          <Text style={styles.text}>{item}</Text>
           <Pressable style={styles.deleteBTn} onPress={() => DeleteItem(index)}>
             <Text style={styles.btnText}>Delete Contact!</Text>
           </Pressable>
         </View>
       )}
-      />
+      />)}
     </SafeAreaView>
   );
 }
@@ -74,26 +79,37 @@ const styles = StyleSheet.create({
   },
   deleteBTn: {
     width: 200,
-    padding:12,
+    padding: 12,
     backgroundColor: "red",
     borderRadius: 4,
   }
   ,
-  contacts: {
-     width: "100%",
-     height:400,
-     backgroundColor:"#111",
-  }
+ contacts: {
+  width: "100%",
+  flex: 1,
+  backgroundColor: "#111",
+}
+
   ,
   list: {
-    margin:12,
+    margin: 12,
     flexDirection: "row",
-    justifyContent:"space-evenly",
-    alignItems:"center"
+    justifyContent: "space-evenly",
+    alignItems: "center"
   },
-  text : {
-    fontSize:20,
-    fontWeight:"bold",
-    color:"white"
-  }
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white"
+  },
+  emptyMsg: {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  backgroundColor: "black",
+  paddingVertical: 40
+}
+
+
 })
