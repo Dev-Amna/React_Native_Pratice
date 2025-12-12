@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-na
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+
   let [inputValue, setInputValue] = useState("");
   let [dataArr, setDataArr] = useState([]);
   const ShowData = () => {
@@ -10,6 +11,7 @@ export default function Index() {
     setInputValue("");
     if (inputValue.length === 0) {
       console.log("ERROR! ");
+      alert(" Please Fill Input!");
     } else {
       setDataArr([...dataArr, inputValue]);
     }
@@ -87,6 +89,7 @@ const styles = StyleSheet.create({
     margin:12,
     flexDirection: "row",
     justifyContent:"space-evenly",
+    alignItems:"center"
   },
   text : {
     fontSize:20,
